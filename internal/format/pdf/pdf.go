@@ -426,39 +426,81 @@ func (f *Format) print(tmp, input, output string) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(f.s.Timeout)*time.Second)
 	defer cancel()
 
-	var cmd *exec.Cmd
-	var tool string
 	if f.s.Command != "" {
 		quote := func(s string) string { return "'" + strings.ReplaceAll(s, "'", `'\''`) + "'" }
-		tool = f.s.Command
-		cmd = exec.CommandContext(ctx, "sh", "-c", strings.NewReplacer("{input}", quote(input), "{output}", quote(output)).Replace(f.s.Command))
-	} else {
-		browser, err := FindBrowser(f.s.Browser)
-		if err != nil {
-			return err
-		}
-		tool = browser
-		args := []string{
-			"--headless", "--disable-gpu", "--no-first-run", "--no-default-browser-check", "--disable-extensions",
-			"--user-data-dir=" + filepath.Join(tmp, "profile"),   // never touch the user's own browser profile
-			"--no-pdf-header-footer", "--print-to-pdf-no-header", // no date and file name in the page margins
-			"--generate-pdf-document-outline", // headings become PDF bookmarks
-			"--print-to-pdf=" + output,
-		}
-		if os.Geteuid() == 0 {
-			args = append(args, "--no-sandbox") // browsers refuse to start as root otherwise (containers, CI)
-		}
-		cmd = exec.CommandContext(ctx, browser, append(args, (&url.URL{Scheme: "file", Path: filepath.ToSlash(input)}).String())...)
+		cmd := exec.CommandContext(ctx, "sh", "-c", strings.NewReplacer("{input}", quote(input), "{output}", quote(output)).Replace(f.s.Command))
+		return f.run(ctx, cmd, f.s.Command)
 	}
+	browser, err := FindBrowser(f.s.Browser)
+	if err != nil {
+		return err
+	}
+	args := []string{
+		"--headless", "--disable-gpu", "--no-first-run", "--no-default-browser-check", "--disable-extensions",
+		"--user-data-dir=" + filepath.Join(tmp, "profile"),   // never touch the user's own browser profile
+		"--no-pdf-header-footer", "--print-to-pdf-no-header", // no date and file name in the page margins
+		"--generate-pdf-document-outline", // headings become PDF bookmarks
+		"--print-to-pdf=" + output,
+	}
+	page := (&url.URL{Scheme: "file", Path: filepath.ToSlash(input)}).String()
+	sandbox := os.Geteuid() != 0 // browsers refuse to start as root with their sandbox (containers, CI)
+	for {
+		a := args
+		if !sandbox {
+			a = append(a, "--no-sandbox")
+		}
+		err := f.run(ctx, exec.CommandContext(ctx, browser, append(a, page)...), browser)
+		// Some Linux systems do not let programs set up the browser's
+		// sandbox (Ubuntu 24.04 and later restrict user namespaces with
+		// AppArmor, as on GitHub's runners), and the browser aborts. The page
+		// is the book's own, built here, so print it once more without the
+		// sandbox.
+		if err != nil && sandbox && runtime.GOOS == "linux" && ctx.Err() == nil && sandboxFailure(err.Error()) {
+			sandbox = false
+			continue
+		}
+		return err
+	}
+}
+
+// run runs the PDF tool and turns a failure into a short error.
+func (f *Format) run(ctx context.Context, cmd *exec.Cmd, tool string) error {
 	var log bytes.Buffer
 	cmd.Stdout, cmd.Stderr = &log, &log
 	if err := cmd.Run(); err != nil {
 		if ctx.Err() != nil {
 			return fmt.Errorf("%s took longer than %d seconds (raise \"timeout\" under format: pdf:)", tool, f.s.Timeout)
 		}
-		return fmt.Errorf("%s: %w\n%s", tool, err, lastLines(log.String(), 8))
+		return fmt.Errorf("%s: %w\n%s", tool, err, errorLines(log.String()))
 	}
 	return nil
+}
+
+// sandboxFailure reports whether a browser's output says it could not start
+// its sandbox, or that it aborted, which is how a sandbox failure ends when
+// the message itself is not shown.
+func sandboxFailure(out string) bool {
+	out = strings.ToLower(out)
+	return strings.Contains(out, "sandbox") || strings.Contains(out, "signal: aborted") || strings.Contains(out, "zygote")
+}
+
+// errorLines picks the lines of a tool's output that say what went wrong:
+// a browser prints its reason on a FATAL or ERROR line, before pages of
+// stack trace. Without such lines, the last few lines are kept.
+func errorLines(s string) string {
+	var picked []string
+	for _, line := range strings.Split(s, "\n") {
+		if strings.Contains(line, ":FATAL:") || strings.Contains(line, ":ERROR:") {
+			picked = append(picked, strings.TrimSpace(line))
+		}
+	}
+	if len(picked) > 0 {
+		if len(picked) > 4 {
+			picked = picked[:4]
+		}
+		return strings.Join(picked, "\n")
+	}
+	return lastLines(s, 8)
 }
 
 func lastLines(s string, n int) string {

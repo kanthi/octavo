@@ -436,3 +436,4 @@
 - Version 0.007 → 0.1.0 (`cli.Version`), tagged `v0.1.0`, so `go install …@v0.1.0` works. Later versions follow semver: features bump the minor, fixes the patch.
 - `.github/workflows/docs.yml`: on every push to main, run the tests, build Octavo from that commit, render the guide (website, PDF with Typst, EPUB) and deploy it to GitHub Pages at https://kanthi.github.io/octavo/. Pages' source set to "GitHub Actions".
 - `guide/octavo-pages.txt` committed, so redirects for moved guide chapters survive CI's clean checkouts.
+- First CI run: TestFormats and TestPDF/chrome failed. GitHub's Ubuntu runner has Chromium, which aborted because Ubuntu's AppArmor stops it from setting up its sandbox. The PDF format now retries once with `--no-sandbox` on Linux when the browser fails that way, and errors show the browser's FATAL/ERROR lines instead of the tail of the stack trace.
