@@ -54,12 +54,12 @@ type Settings struct {
 }
 
 type Library struct {
-	Dir     string // absolute path of the library folder
-	Config  *Config
-	Books   []string // book folder names, in alphabetical order
-	drafts  map[string]bool
-	mu      sync.Mutex           // guards facts, while books build in parallel
-	facts   map[string]bookFacts // book -> what its portal card shows, for books loaded in this run
+	Dir    string // absolute path of the library folder
+	Config *Config
+	Books  []string // book folder names, in alphabetical order
+	drafts map[string]bool
+	mu     sync.Mutex           // guards facts, while books build in parallel
+	facts  map[string]bookFacts // book -> what its portal card shows, for books loaded in this run
 }
 
 // bookFacts is what a portal card says about a book that comes from its
