@@ -1,0 +1,40 @@
+/* The book as printed pages. The @page rules (paper, margins, page numbers,
+   running headers) and the font are written by the format, before this. */
+html { font-size: var(--pdf-size); }
+body { margin: 0; font-family: var(--pdf-font); line-height: 1.48; }
+code, pre { font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace; font-variant-ligatures: none; }
+
+/* Body text is set like a book: justified with hyphenation. Everything that
+   is not running prose stays ragged-right. */
+.chapter { text-align: var(--pdf-align); hyphens: auto; }
+.chapter li, .chapter td, .chapter th, .chapter dd { text-align: left; }
+
+/* Front matter */
+.front { page: front; }
+.title-page { height: 82vh; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.book-title { margin: 0 0 .5em; font-size: 2.9em; font-weight: 700; line-height: 1.12; letter-spacing: -.01em; }
+.title-rule { width: 3.5em; margin: 0 auto 1.6em; border-top: 1.2pt solid #1a1a1a; }
+.title-page .author { font-size: 1.25em; margin: 0 0 .3em; }
+.title-page .date { color: #555; margin: 0; }
+.title-page .description { margin: 3em 12% 0; font-style: italic; color: #444; }
+
+.toc { break-before: page; page-break-before: always; text-align: left; }
+.toc > h1 { margin: 2.4em 0 1.4em; font-size: 2em; }
+.toc ol { list-style: none; padding-left: 1.5em; margin: 0; }
+.toc > ol { padding-left: 0; }
+.toc li { margin: .28em 0; }
+.toc a { display: flex; color: inherit; } /* a long title wraps beside its number, not under it */
+.toc .number { flex: none; width: 2.2em; color: #555; font-variant-numeric: tabular-nums; }
+.toc .group { display: block; margin: 1.1em 0 .3em; font-weight: 700; break-after: avoid; page-break-after: avoid; }
+.toc ol ol .group { margin-top: .6em; font-weight: 600; font-style: italic; }
+
+/* A part gets a page of its own. */
+.part { page: part; break-before: page; page-break-before: always; height: 70vh; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.part h1 { margin: 0; font-size: 2.4em; text-align: center; }
+.part .part-label { margin: 0 0 1em; font-size: .85em; letter-spacing: .2em; text-transform: uppercase; color: #555; }
+
+/* Every chapter starts on a new page, with room above the title. */
+.chapter { break-before: page; page-break-before: always; }
+.chapter > h1 { margin: 2.6em 0 1.5em; padding-bottom: .55em; border-bottom: .75pt solid #1a1a1a; font-size: 2.15em; line-height: 1.15; letter-spacing: -.01em; }
+.chapter-number { display: block; margin-bottom: .7em; font-size: .4em; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: #555; }
+a[href^="http"] { overflow-wrap: anywhere; }

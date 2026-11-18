@@ -1,0 +1,41 @@
+book:
+  title: "{{title}}"
+  author: Your Name
+  date: "{{date}}"
+  description: A book written with Octavo.
+  chapters:
+    - index.md
+    - chapters/01-intro.md
+    - chapters/02-basics.md
+
+format:
+  html:
+    theme: auto          # light | dark | auto (follows the reader's system)
+    font: literata       # literata | source-serif | atkinson | system; readers can switch in the "Aa" menu
+    css: custom.css      # your own styles, loaded after the built-in theme
+  epub: {}               # the e-book; add "cover: images/cover.png" for your own cover
+  pdf:
+    paper: A4            # or letter, A5, "6in 9in"
+
+# "octavo render" builds every format above. For one run only:
+#   octavo render --to html     (or pdf, epub, html,epub, all)
+
+# Where "octavo publish" sends the book. Uncomment the ones you use.
+# With more than one, name it: octavo publish gh-pages
+#
+# Or let GitHub build and publish the book on every push:
+#   octavo publish --setup github
+#
+# publish:
+#   gh-pages: {}                      # the gh-pages branch of this repository
+#   ftp:
+#     host: ftp.example.com
+#     user: me
+#     path: public_html/book          # password: export OCTAVO_FTP_PASSWORD=...
+#   rsync:
+#     target: me@example.com:/var/www/book
+#   folder:
+#     path: /var/www/book
+#   cloudflare:
+#     type: command
+#     run: npx wrangler pages deploy {dir} --project-name my-book

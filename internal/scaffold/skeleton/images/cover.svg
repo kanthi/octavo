@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" width="640" height="200" role="img" aria-label="Book cover">
+  <rect width="640" height="200" rx="12" fill="#2456c9"/>
+  <rect x="40" y="40" width="90" height="120" rx="6" fill="#ffffff" opacity=".95"/>
+  <rect x="54" y="62" width="62" height="8" rx="4" fill="#2456c9"/>
+  <rect x="54" y="80" width="44" height="8" rx="4" fill="#9db6ee"/>
+  <rect x="170" y="74" width="300" height="18" rx="9" fill="#ffffff"/>
+  <rect x="170" y="108" width="200" height="12" rx="6" fill="#9db6ee"/>
+</svg>

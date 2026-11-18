@@ -1,0 +1,3 @@
+/* Book colours. Loads after the built-in theme. */
+:root { --accent: #a33b1f; --note: #a33b1f; }
+[data-theme="dark"] { --accent: #f08a66; --note: #f08a66; }

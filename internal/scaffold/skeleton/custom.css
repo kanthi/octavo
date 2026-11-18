@@ -1,0 +1,32 @@
+/* Your book's own styles. This file loads after the built-in theme, so
+   anything set here wins. Remove the comment marks around what you change. */
+
+/* --font-body takes any font of your own; "font:" in octavo.yml picks a
+   built-in one. Write no comments inside the block below: CSS comments do
+   not nest, so one would end the whole comment early. */
+
+/*
+:root {
+  --font-body: Georgia, serif;
+  --font-ui: system-ui, sans-serif;
+  --font-mono: ui-monospace, Menlo, monospace;
+  --content-width: 44rem;
+  --sidebar-width: 17rem;
+
+  --bg: #ffffff;
+  --bg-soft: #f5f6f8;
+  --text: #1d2330;
+  --text-soft: #5b6475;
+  --border: #e1e4ea;
+  --accent: #2456c9;
+}
+
+[data-theme="dark"] {
+  --bg: #14171d;
+  --bg-soft: #1d2129;
+  --text: #e4e7ee;
+  --text-soft: #9aa3b5;
+  --border: #2c323d;
+  --accent: #7ea6ff;
+}
+*/

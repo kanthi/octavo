@@ -1,0 +1,21 @@
+.DS_Store
+
+# Go build output
+/octavo
+/bin/
+/dist/
+*.test
+*.out
+coverage.*
+
+# Rendered books (the tool's own output, and sample books)
+_book/
+.octavo/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Sample library output
+/examples/library/public/

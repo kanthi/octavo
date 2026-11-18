@@ -1,0 +1,10 @@
+library:
+  title: K19G Books
+  description: Sample library for testing Octavo. Four small books, one portal.
+  books-dir: books
+  output-dir: public
+  theme: auto
+
+publish:
+  folder:
+    path: ../published-copy     # stands in for a real host

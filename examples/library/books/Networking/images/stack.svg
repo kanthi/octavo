@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 190" width="520" height="190" role="img" aria-label="Four layers stacked: application, transport, internet, link" font-family="system-ui, sans-serif" font-size="15">
+  <g fill="#0f7a5c" stroke="#ffffff" stroke-width="2">
+    <rect x="10" y="10" width="500" height="40" rx="6" opacity=".55"/>
+    <rect x="10" y="54" width="500" height="40" rx="6" opacity=".7"/>
+    <rect x="10" y="98" width="500" height="40" rx="6" opacity=".85"/>
+    <rect x="10" y="142" width="500" height="40" rx="6"/>
+  </g>
+  <g fill="#ffffff" font-weight="600">
+    <text x="26" y="35">Application</text><text x="26" y="79">Transport</text>
+    <text x="26" y="123">Internet</text><text x="26" y="167">Link</text>
+  </g>
+  <g fill="#ffffff" text-anchor="end">
+    <text x="494" y="35">HTTP, DNS, SSH</text><text x="494" y="79">TCP, UDP</text>
+    <text x="494" y="123">IP, ICMP</text><text x="494" y="167">Ethernet, ARP</text>
+  </g>
+</svg>

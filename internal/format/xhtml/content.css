@@ -1,0 +1,56 @@
+/* What a chapter contains, laid out for the printed page. Used by the PDF
+   format, which adds the page rules and the book's font after this. */
+body { color: #1a1a1a; font-kerning: normal; font-variant-ligatures: common-ligatures; text-rendering: optimizeLegibility; }
+h1, h2, h3, h4, h5, h6 { line-height: 1.2; margin: 1.7em 0 .55em; text-align: left; hyphens: none; font-weight: 700;
+  break-after: avoid; page-break-after: avoid; break-inside: avoid; page-break-inside: avoid; }
+h2 { font-size: 1.45em; }
+h3 { font-size: 1.18em; }
+h4 { font-size: 1em; }
+h5, h6 { font-size: 1em; font-style: italic; font-weight: 500; }
+p { margin: 0 0 .7em; orphans: 2; widows: 2; }
+a { color: #1d4ba8; text-decoration: none; }
+img, svg { display: block; max-width: 100%; height: auto; margin: 1.2em auto; break-inside: avoid; page-break-inside: avoid; }
+p > img:only-child { margin: 0 auto; }
+hr { border: 0; margin: 1.8em auto; width: 30%; border-top: .5pt solid #999; }
+blockquote { margin: 1em 0 1em 1.2em; padding-left: 1em; border-left: 2pt solid #c9ced6; color: #3f4654; font-style: italic; }
+ul, ol { padding-left: 1.7em; margin: 0 0 .7em; }
+li { margin: .2em 0; }
+li > p { margin-bottom: .35em; }
+li > input[type="checkbox"] { margin-right: .4em; }
+sup, sub { line-height: 0; }
+
+/* Code keeps its exact spacing: never justified, never hyphenated. Long lines
+   wrap so nothing is cut off at the page edge. */
+code, pre { font-family: ui-monospace, "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", "Liberation Mono", monospace; hyphens: none; font-variant-ligatures: none; }
+code { font-size: .84em; background: #f1f3f6; padding: .08em .28em; border-radius: 2pt; }
+pre { font-size: .8em; line-height: 1.42; text-align: left; white-space: pre-wrap; overflow-wrap: anywhere;
+  margin: 1em 0; padding: .7em .9em; background: #f7f8fa; border: .5pt solid #d5d9e0; border-radius: 3pt; }
+pre code { background: none; padding: 0; font-size: 1em; }
+
+table { border-collapse: collapse; margin: 1.1em 0; font-size: .88em; line-height: 1.35; text-align: left; hyphens: manual; }
+thead { display: table-header-group; } /* repeat the header row when a table runs over a page */
+tr { break-inside: avoid; page-break-inside: avoid; }
+th, td { border-bottom: .5pt solid #c9ced6; padding: .4em .7em; vertical-align: top; }
+th { border-top: 1pt solid #1a1a1a; border-bottom: .75pt solid #1a1a1a; font-weight: 700; }
+tbody tr:last-child td { border-bottom: 1pt solid #1a1a1a; }
+
+.callout { margin: 1.2em 0; padding: .6em 1em; border-left: 3pt solid #2456c9; background: #f5f7fb; text-align: left; hyphens: manual;
+  break-inside: avoid; page-break-inside: avoid; }
+.callout > p { margin: .3em 0; }
+.callout-title { color: #2456c9; font-size: .78em; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.callout-tip { border-left-color: #1a7f4b; background: #f3f9f5; } .callout-tip .callout-title { color: #1a7f4b; }
+.callout-warning { border-left-color: #b26a00; background: #fbf7ef; } .callout-warning .callout-title { color: #b26a00; }
+.callout-important { border-left-color: #7a3fc4; background: #f8f5fc; } .callout-important .callout-title { color: #7a3fc4; }
+.callout-caution { border-left-color: #c0362c; background: #fcf5f4; } .callout-caution .callout-title { color: #c0362c; }
+
+.footnotes { margin-top: 2.2em; font-size: .86em; line-height: 1.4; text-align: left; }
+.footnotes hr { margin: 0 0 .8em; width: 28%; }
+.footnote-ref { font-size: .8em; }
+
+/* Figures: an image alone in its paragraph, numbered, with a caption. Kept
+   on one page with its caption. */
+figure { margin: 1.4em 0; text-align: center; break-inside: avoid; page-break-inside: avoid; }
+figure img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+figcaption { margin-top: .5em; font-size: .88em; line-height: 1.4; text-align: center; hyphens: manual; }
+.figure-number { font-weight: 650; }
+.dark-only { display: none; }

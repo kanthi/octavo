@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" role="img" aria-labelledby="t d" font-family="system-ui, sans-serif">
+  <title id="t">How Octavo builds a book</title>
+  <desc id="d">Markdown chapters and octavo.yml go into octavo render, which makes a website, an EPUB and a PDF; octavo publish sends them to a host.</desc>
+  <style>
+    .box { fill: #eef5f2; stroke: #2f6f5e; stroke-width: 1.5; }
+    .step { fill: #2f6f5e; }
+    .label { font-size: 14px; fill: #1d2330; }
+    .white { font-size: 14px; fill: #fff; font-weight: 600; }
+    .line { stroke: #2f6f5e; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2f6f5e"/></marker></defs>
+  <rect class="box" x="10" y="60" width="140" height="100" rx="10"/>
+  <text class="label" x="80" y="100" text-anchor="middle">Markdown</text>
+  <text class="label" x="80" y="122" text-anchor="middle">chapters +</text>
+  <text class="label" x="80" y="144" text-anchor="middle">octavo.yml</text>
+  <path class="line" d="M150 110H200"/>
+  <rect class="step" x="200" y="85" width="130" height="50" rx="10"/>
+  <text class="white" x="265" y="115" text-anchor="middle">octavo render</text>
+  <path class="line" d="M330 110C360 110 360 40 390 40"/>
+  <path class="line" d="M330 110H390"/>
+  <path class="line" d="M330 110C360 110 360 180 390 180"/>
+  <rect class="box" x="390" y="20" width="100" height="40" rx="8"/><text class="label" x="440" y="45" text-anchor="middle">Website</text>
+  <rect class="box" x="390" y="90" width="100" height="40" rx="8"/><text class="label" x="440" y="115" text-anchor="middle">EPUB</text>
+  <rect class="box" x="390" y="160" width="100" height="40" rx="8"/><text class="label" x="440" y="185" text-anchor="middle">PDF</text>
+  <path class="line" d="M490 110H520"/>
+  <rect class="step" x="520" y="85" width="110" height="50" rx="10"/>
+  <text class="white" x="575" y="115" text-anchor="middle">publish</text>
+</svg>

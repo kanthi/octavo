@@ -1,0 +1,59 @@
+book:
+  title: Octavo Guide
+  author: The Octavo authors
+  description: "The user guide for Octavo {{octavo-version}}: write books in Markdown, build them as a website, an EPUB and a PDF, and publish them."
+  chapters:
+    - index.md
+    - part: Getting started
+      contents:
+        - content/01-start/01-install.md
+        - content/01-start/02-first-book.md
+        - content/01-start/03-preview.md
+    - part: Writing
+      contents:
+        - content/02-writing/01-chapters.md
+        - content/02-writing/02-markdown.md
+        - content/02-writing/03-callouts.md
+        - content/02-writing/04-drafts.md
+    - part: Formats
+      contents:
+        - content/03-formats/01-choosing.md
+        - content/03-formats/02-website.md
+        - content/03-formats/03-epub.md
+        - content/03-formats/04-pdf.md
+    - part: Libraries
+      contents:
+        - content/04-libraries/01-libraries.md
+        - content/04-libraries/02-adding-books.md
+    - part: Publishing
+      contents:
+        - content/05-publishing/01-publishing.md
+        - content/05-publishing/02-versions.md
+        - section: Targets
+          contents:
+            - text: GitHub Pages
+              file: content/05-publishing/targets/gh-pages.md
+            - text: FTP
+              file: content/05-publishing/targets/ftp.md
+            - text: rsync
+              file: content/05-publishing/targets/rsync.md
+            - text: A folder
+              file: content/05-publishing/targets/folder.md
+            - text: Any command
+              file: content/05-publishing/targets/command.md
+    - part: Reference
+      contents:
+        - content/06-reference/01-commands.md
+        - content/06-reference/02-book-settings.md
+        - content/06-reference/03-library-settings.md
+        - content/06-reference/04-environment.md
+    - content/troubleshooting.md
+
+format:
+  html:
+    theme: auto
+    font: literata
+    css: styles/guide.css
+  epub: {}
+  pdf:
+    paper: A4

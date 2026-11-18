@@ -1,0 +1,30 @@
+# Every page address this book's website has had, kept by Octavo so that
+# links to moved chapters keep working. Commit this file with the book.
+# Each line: the page, a tab, then its chapter title, or "-> " and the page
+# its old address now forwards to.
+content/01-start/01-install.html	Install
+content/01-start/02-first-book.html	Your first book
+content/01-start/03-preview.html	Live preview
+content/02-writing/01-chapters.html	Chapters and parts
+content/02-writing/02-markdown.html	Markdown
+content/02-writing/03-callouts.html	Callouts
+content/02-writing/04-drafts.html	Drafts
+content/03-formats/01-choosing.html	Choosing formats
+content/03-formats/02-website.html	The website
+content/03-formats/03-epub.html	The EPUB
+content/03-formats/04-pdf.html	The PDF
+content/04-libraries/01-libraries.html	Libraries
+content/04-libraries/02-adding-books.html	Adding books
+content/05-publishing/01-publishing.html	Publishing
+content/05-publishing/02-versions.html	Versions
+content/05-publishing/targets/command.html	Any command
+content/05-publishing/targets/folder.html	A folder
+content/05-publishing/targets/ftp.html	FTP
+content/05-publishing/targets/gh-pages.html	GitHub Pages
+content/05-publishing/targets/rsync.html	rsync
+content/06-reference/01-commands.html	Commands
+content/06-reference/02-book-settings.html	Book settings
+content/06-reference/03-library-settings.html	Library settings
+content/06-reference/04-environment.html	Environment variables
+content/troubleshooting.html	Troubleshooting
+index.html	Welcome

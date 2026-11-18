@@ -1,0 +1,22 @@
+book:
+  title: "Boring Rust"
+  author: K19G
+  date: "2026-11-16"
+  description: "Rust without the drama: ownership first, then everything else."
+  chapters:
+    - index.md
+    - part: "Foundations"
+      contents:
+        - text: "Getting started"
+          file: content/01-foundations/01-getting-started.md
+        - text: "Ownership"
+          file: content/01-foundations/02-ownership.md
+    - part: "Practice"
+      contents:
+        - text: "Error handling"
+          file: content/02-practice/01-errors.md
+
+format:
+  html:
+    theme: auto
+    css: styles/custom.css

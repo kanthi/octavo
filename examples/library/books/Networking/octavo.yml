@@ -1,0 +1,52 @@
+book:
+  title: "Networking"
+  author: K19G
+  date: "2026-11-16"
+  description: "First principles to NetOps. A multi-level sample: parts, sections and sub-sections."
+  chapters:
+    - index.md
+    - part: "Foundations"
+      contents:
+        - text: "Overview"
+          file: content/01-foundations/index.md
+        - section: "Layers"
+          contents:
+            - text: "Intro"
+              file: content/01-foundations/01-layers/index.md
+            - section: "Link layer"
+              contents:
+                - text: "Ethernet"
+                  file: content/01-foundations/01-layers/01-link/01-ethernet.md
+                - text: "ARP"
+                  file: content/01-foundations/01-layers/01-link/02-arp.md
+            - section: "Internet layer"
+              contents:
+                - text: "IP"
+                  file: content/01-foundations/01-layers/02-internet/01-ip.md
+                - text: "ICMP"
+                  file: content/01-foundations/01-layers/02-internet/02-icmp.md
+        - section: "Addressing"
+          contents:
+            - text: "Subnets"
+              file: content/01-foundations/02-addressing/01-subnets.md
+    - part: "NetOps"
+      contents:
+        - section: "Tools"
+          contents:
+            - section: "Inspect"
+              contents:
+                - text: "ip"
+                  file: content/02-netops/01-tools/01-inspect/01-ip-command.md
+                - text: "ping"
+                  file: content/02-netops/01-tools/01-inspect/02-ping.md
+        - section: "Labs"
+          contents:
+            - text: "Two hosts, one switch"
+              file: content/02-netops/02-labs/01-two-hosts.md
+    - text: "Glossary"
+      file: content/glossary.md
+
+format:
+  html:
+    theme: auto
+    css: styles/custom.css

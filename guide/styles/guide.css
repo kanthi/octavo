@@ -1,0 +1,5 @@
+/* The guide's own touches. Every book can have a stylesheet like this one:
+   it is listed under "format: html: css:" in octavo.yml. */
+:root { --accent: #2f6f5e; }
+[data-theme="dark"] { --accent: #7fcdb4; }
+article kbd { padding: .05em .4em; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: .3em; background: var(--bg-soft); font: .85em var(--font-mono); }

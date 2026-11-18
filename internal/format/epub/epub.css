@@ -1,0 +1,73 @@
+/* Octavo EPUB stylesheet.
+
+   An e-book is read in an app that has its own font, text size, margins and
+   colour themes, chosen by the reader. So this file sets no body font, no
+   text colour and no page background, and uses only relative sizes. Tints
+   are translucent grey, which works on white, sepia and black pages alike. */
+
+body { margin: 0 5%; line-height: 1.5; widows: 2; orphans: 2;
+  -webkit-hyphens: auto; -epub-hyphens: auto; hyphens: auto; }
+
+h1, h2, h3, h4, h5, h6 { line-height: 1.2; margin: 1.6em 0 .5em; text-align: left;
+  -webkit-hyphens: none; -epub-hyphens: none; hyphens: none;
+  page-break-after: avoid; break-after: avoid; page-break-inside: avoid; break-inside: avoid; }
+h1 { font-size: 1.7em; margin-top: 2em; }
+h2 { font-size: 1.35em; }
+h3 { font-size: 1.15em; }
+h4, h5, h6 { font-size: 1em; }
+.chapter-number { display: block; margin-bottom: .5em; font-size: .5em; font-weight: normal; letter-spacing: .12em; text-transform: uppercase; opacity: .7; }
+
+p { margin: 0 0 .8em; }
+ul, ol { margin: 0 0 .8em; padding-left: 1.5em; }
+li { margin: .2em 0; }
+img, svg { max-width: 100%; height: auto; }
+hr { border: 0; border-top: 1px solid rgba(128, 128, 128, .5); margin: 2em 20%; }
+blockquote { margin: 1em 0 1em .5em; padding-left: 1em; border-left: .2em solid rgba(128, 128, 128, .5); font-style: italic; }
+sup, sub { line-height: 0; }
+
+/* Code is never hyphenated or justified, and long lines wrap instead of
+   running off the screen. */
+code, pre { font-family: monospace; -webkit-hyphens: none; -epub-hyphens: none; hyphens: none; }
+code { font-size: .9em; }
+pre { margin: 1em 0; padding: .6em .8em; font-size: .8em; line-height: 1.4; text-align: left;
+  white-space: pre-wrap; overflow-wrap: break-word; word-wrap: break-word;
+  border: 1px solid rgba(128, 128, 128, .35); border-radius: .3em; background-color: rgba(128, 128, 128, .08); }
+pre code { font-size: 1em; }
+
+table { margin: 1em 0; max-width: 100%; border-collapse: collapse; font-size: .9em; }
+th, td { padding: .3em .5em; border: 1px solid rgba(128, 128, 128, .5); text-align: left; vertical-align: top;
+  -webkit-hyphens: manual; -epub-hyphens: manual; hyphens: manual; }
+th { background-color: rgba(128, 128, 128, .12); }
+
+.callout { margin: 1.2em 0; padding: .5em 1em; border-left: .25em solid #3b82f6; background-color: rgba(128, 128, 128, .08);
+  page-break-inside: avoid; break-inside: avoid; }
+.callout p { margin: .3em 0; }
+.callout-title { font-size: .8em; font-weight: bold; letter-spacing: .06em; text-transform: uppercase; color: #3b82f6; }
+.callout-tip { border-left-color: #16a34a; } .callout-tip .callout-title { color: #16a34a; }
+.callout-warning { border-left-color: #d97706; } .callout-warning .callout-title { color: #d97706; }
+.callout-important { border-left-color: #9333ea; } .callout-important .callout-title { color: #9333ea; }
+.callout-caution { border-left-color: #dc2626; } .callout-caution .callout-title { color: #dc2626; }
+
+.footnotes { margin-top: 2em; font-size: .9em; }
+.footnotes hr { margin: 0 60% 1em 0; }
+
+/* Front matter and part pages */
+.cover { margin: 0; padding: 0; text-align: center; }
+.cover img { max-width: 100%; max-height: 100%; }
+.title-page { margin-top: 20%; text-align: center; }
+.title-page h1 { margin: 0 0 .6em; font-size: 2.2em; text-align: center; }
+.title-page p { margin: .3em 0; }
+.title-page .description { margin-top: 2em; font-style: italic; }
+.part-page { margin-top: 30%; text-align: center; }
+.part-page h1 { text-align: center; }
+nav ol { padding-left: 1.2em; list-style: none; }
+nav > ol { padding-left: 0; }
+nav li { margin: .35em 0; }
+nav .group { font-weight: bold; }
+
+/* Figures: an image alone in its paragraph, numbered, with a caption. */
+figure { margin: 1.2em 0; text-align: center; page-break-inside: avoid; }
+figure img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+figcaption { margin-top: .4em; font-size: .9em; text-align: center; }
+.figure-number { font-weight: bold; }
+.dark-only { display: none; }

@@ -1,0 +1,20 @@
+book:
+  title: "Go"
+  author: K19G
+  date: "2026-11-16"
+  description: "The Go language, from first program to concurrency."
+  chapters:
+    - index.md
+    - part: "Basics"
+      contents:
+        - content/01-basics/01-hello.md
+        - content/01-basics/02-types.md
+    - part: "Concurrency"
+      contents:
+        - content/02-concurrency/01-goroutines.md
+        - content/02-concurrency/02-channels.md
+
+format:
+  html:
+    theme: auto
+    css: styles/custom.css

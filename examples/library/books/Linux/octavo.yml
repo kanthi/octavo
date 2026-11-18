@@ -1,0 +1,30 @@
+book:
+  title: "Linux"
+  author: K19G
+  date: "2026-11-16"
+  description: "Commands, editors and shell scripting."
+  chapters:
+    - index.md
+    - part: "Commands"
+      contents:
+        - section: "Help and Docs"
+          contents:
+            - text: "man"
+              file: content/01-commands/00-help-and-docs/01-man.md
+            - text: "apropos"
+              file: content/01-commands/00-help-and-docs/02-apropos.md
+        - section: "Files and Paths"
+          contents:
+            - text: "pwd"
+              file: content/01-commands/01-files-and-paths/01-pwd.md
+            - text: "ls"
+              file: content/01-commands/01-files-and-paths/02-ls.md
+    - part: "Scripting"
+      contents:
+        - text: "First script"
+          file: content/03-scripting/01-first-script.md
+
+format:
+  html:
+    theme: auto
+    css: styles/custom.css

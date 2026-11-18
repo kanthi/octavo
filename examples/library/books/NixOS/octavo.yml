@@ -1,0 +1,16 @@
+book:
+  title: "NixOS"
+  author: K19G
+  date: "2026-11-16"
+  description: "A whole system described in one file."
+  chapters:
+    - index.md
+    - part: "Start"
+      contents:
+        - content/01-start/01-why-nix.md
+        - content/01-start/02-configuration.md
+
+format:
+  html:
+    theme: auto
+    css: styles/custom.css

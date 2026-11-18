@@ -1,0 +1,60 @@
+# Publishes the Octavo Guide (guide/) on GitHub Pages on every push to main:
+# https://kanthi.github.io/octavo/
+#
+# The guide is built by the Octavo of the same commit, not the last release,
+# so the published guide always matches the code.
+#
+# Once, on GitHub: Settings > Pages > Build and deployment > Source:
+# "GitHub Actions".
+name: Publish the guide
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # a "Run workflow" button on the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One publish at a time; a newer push replaces one that is still waiting.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # all history: "Last updated" dates come from git
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+      - name: Test
+        run: go test ./...
+      - name: Build Octavo
+        run: go build -o octavo ./cmd/octavo
+      - name: Install Typst, for the PDF
+        uses: typst-community/setup-typst@v5
+      - id: pages
+        uses: actions/configure-pages@v6
+      - name: Build the guide
+        run: ./octavo render --dir guide --to all
+        env:
+          OCTAVO_SITE_URL: ${{ steps.pages.outputs.base_url }}/
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: guide/_book
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v5
