@@ -130,9 +130,13 @@ jobs:
       - id: pages
         uses: actions/configure-pages@v6
       - name: Build
-        run: octavo render%[2]s
+        # GitHub gives the address as http:// when the repository does not
+        # enforce HTTPS, though the site is served over https://.
+        run: |
+          export OCTAVO_SITE_URL="${BASE_URL/#http:/https:}/"
+          octavo render%[2]s
         env:
-          OCTAVO_SITE_URL: ${{ steps.pages.outputs.base_url }}/
+          BASE_URL: ${{ steps.pages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v5
         with:
           path: %[3]s

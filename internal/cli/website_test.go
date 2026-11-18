@@ -96,7 +96,7 @@ func TestSetupGitHub(t *testing.T) {
 		"branches: [trunk]",
 		"octavo render --dir books/my-book",
 		"path: books/my-book/_book",
-		"OCTAVO_SITE_URL: ${{ steps.pages.outputs.base_url }}/",
+		`export OCTAVO_SITE_URL="${BASE_URL/#http:/https:}/"`, "BASE_URL: ${{ steps.pages.outputs.base_url }}",
 		"actions/deploy-pages@")
 	if !strings.Contains(fail(t, "publish", "--setup", "github", "--dir", dir), "already exists") {
 		t.Error("a second setup should refuse to overwrite the workflow")

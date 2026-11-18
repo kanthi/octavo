@@ -440,3 +440,4 @@
 - The guide went live at https://www.kanthi.in/octavo/. Two fixes after the first deploy:
   - The front page showed `{{octavo-version}}`: only `octavo guide` replaced it. Now `{{< meta octavo-version >}}` is a value every book can use, filled in by the Octavo building it (`book.OctavoVersion`, set in `cli.Run`); guide.WriteTo no longer rewrites text.
   - The sitemap and canonical/og:url used http://, because configure-pages reports http when the repository does not enforce HTTPS. docs.yml now turns it into https://.
+- `--setup github` workflow: the same http→https fix as docs.yml, so books published this way get https:// sitemap and link-preview addresses.
