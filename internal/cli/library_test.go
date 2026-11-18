@@ -202,3 +202,18 @@ func TestDrafts(t *testing.T) {
 	contains(t, "single draft", fail(t, "render", "--dir", single), "draft", "--drafts")
 	run(t, "render", "--dir", single, "--drafts")
 }
+
+// A portal card counts every chapter of its book, including those added by
+// their number, also when only another book is rebuilt.
+func TestPortalCountsAddedChapters(t *testing.T) {
+	lib := filepath.Join(t.TempDir(), "lib")
+	run(t, "new", "--library", lib, "--books", "Linux,Go")
+	if err := os.WriteFile(filepath.Join(lib, "books", "Linux", "chapters", "03-more.md"), []byte("# More\n\nText.\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	run(t, "render", "--dir", lib, "--to", "html")
+	contains(t, "portal after a full build", read(t, lib, "public", "index.html"), "4 chapters")
+	run(t, "render", "--dir", lib, "--to", "html", "Go")
+	portal := read(t, lib, "public", "index.html")
+	contains(t, "portal after building Go", portal, "4 chapters", "3 chapters")
+}

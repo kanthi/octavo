@@ -58,13 +58,20 @@ type Library struct {
 	Config  *Config
 	Books   []string // book folder names, in alphabetical order
 	drafts  map[string]bool
-	mu      sync.Mutex        // guards updated, while books build in parallel
-	updated map[string]string // book -> its newest chapter date, for books built in this run
+	mu      sync.Mutex           // guards facts, while books build in parallel
+	facts   map[string]bookFacts // book -> what its portal card shows, for books loaded in this run
 }
 
-func (l *Library) setUpdated(name, day string) {
+// bookFacts is what a portal card says about a book that comes from its
+// chapters rather than its octavo.yml.
+type bookFacts struct {
+	chapters int    // every chapter, including those added by number
+	updated  string // YYYY-MM-DD, the newest chapter date
+}
+
+func (l *Library) setFacts(name string, b *book.Book) {
 	l.mu.Lock()
-	l.updated[name] = day
+	l.facts[name] = bookFacts{chapters: len(b.Chapters), updated: b.Updated}
 	l.mu.Unlock()
 }
 
@@ -110,7 +117,7 @@ func Open(dir string) (*Library, error) {
 	default:
 		return nil, fmt.Errorf("%s: theme must be light, dark or auto, not %q", file, c.Library.Theme)
 	}
-	l := &Library{Dir: abs, Config: &c, drafts: map[string]bool{}, updated: map[string]string{}}
+	l := &Library{Dir: abs, Config: &c, drafts: map[string]bool{}, facts: map[string]bookFacts{}}
 	entries, err := os.ReadDir(l.BooksDir())
 	if err != nil {
 		return nil, fmt.Errorf("books folder: %w", err)
@@ -373,7 +380,7 @@ func (l *Library) buildBook(name, public string, opts BuildOptions) ([]string, e
 		if err != nil {
 			return nil, err
 		}
-		l.setUpdated(name, b.Updated)
+		l.setFacts(name, b)
 		err = format.RenderAll(b, st.out, renderOpts)
 		return st.out.Changed(), err
 	}
@@ -382,7 +389,7 @@ func (l *Library) buildBook(name, public string, opts BuildOptions) ([]string, e
 	if err != nil {
 		return nil, err
 	}
-	l.setUpdated(name, b.Updated)
+	l.setFacts(name, b)
 	out := b.OutputDir()
 	if _, err := versions.Build(b, out, renderOpts); err != nil {
 		return nil, err

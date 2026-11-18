@@ -46,17 +46,19 @@ type portal struct {
 	FontFaces   template.CSS // @font-face rules for the title font
 }
 
-// bookUpdated is a book's newest chapter date: from this run's build, or,
-// for a book not built in this run, by loading it.
-func (l *Library) bookUpdated(name string) string {
-	if d, ok := l.updated[name]; ok {
-		return d
+// bookFacts returns a book's chapter count and newest chapter date: from
+// this run's build, or, for a book not built in this run, by loading it.
+// ok is false when the book does not load.
+func (l *Library) bookFacts(name string) (f bookFacts, ok bool) {
+	if f, ok := l.facts[name]; ok {
+		return f, true
 	}
-	if b, err := book.Load(filepath.Join(l.BooksDir(), name)); err == nil {
-		l.updated[name] = b.Updated
-		return b.Updated
+	b, err := book.Load(filepath.Join(l.BooksDir(), name))
+	if err != nil {
+		return bookFacts{}, false
 	}
-	return ""
+	l.setFacts(name, b)
+	return l.facts[name], true
 }
 
 // titleFont sets the book titles on the cards.
@@ -195,10 +197,14 @@ func (l *Library) writePortal(public string, liveReload, drafts bool) (bool, err
 		if err != nil {
 			continue // its old copy stays reachable by URL, but a broken book gets no card
 		}
+		facts, ok := l.bookFacts(name)
+		if !ok {
+			facts.chapters = len(cfg.Book.Files())
+		}
 		c := card{
 			Name: name, Title: cfg.Book.Title, Description: cfg.Book.Description, Author: cfg.Book.Author,
-			Chapters: len(cfg.Book.Files()), URL: read, Read: read, Downloads: downloads,
-			Draft: l.Draft(name), Colour: colour[name], Updated: l.bookUpdated(name),
+			Chapters: facts.chapters, URL: read, Read: read, Downloads: downloads,
+			Draft: l.Draft(name), Colour: colour[name], Updated: facts.updated,
 		}
 		if c.URL == "" {
 			c.URL = downloads[0].URL

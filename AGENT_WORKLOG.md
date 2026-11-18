@@ -441,3 +441,8 @@
   - The front page showed `{{octavo-version}}`: only `octavo guide` replaced it. Now `{{< meta octavo-version >}}` is a value every book can use, filled in by the Octavo building it (`book.OctavoVersion`, set in `cli.Run`); guide.WriteTo no longer rewrites text.
   - The sitemap and canonical/og:url used http://, because configure-pages reports http when the repository does not enforce HTTPS. docs.yml now turns it into https://.
 - `--setup github` workflow: the same http→https fix as docs.yml, so books published this way get https:// sitemap and link-preview addresses.
+
+## 2026-11-18 — Portal chapter counts; mynotes rebuilds only changed books
+
+- Bug: portal cards counted only the chapters listed in octavo.yml, so Linux showed 425 instead of 444 (19 added by number). Library now keeps `bookFacts` (chapter count and newest date) from the loaded book, built or not; the card falls back to the list only when the book does not load. Test: TestPortalCountsAddedChapters (full build, then a build of another book only).
+- mynotes `.github/workflows/octavo.yml` (in that repo): the site from the last build is kept with actions/cache (public/ plus `.octavo-build`, "<commit> <octavo version>"); a push rebuilds only the books with changed files (`octavo render A B`), and everything when there is no cache, a file outside books/ changed, a book was removed or renamed, Octavo's version changed, or "Run workflow" asks for it. A failed partial build falls back to a full one. The decision step was tested on 9 cases in a scratch clone; `git diff --no-renames` was needed so a renamed book's old folder is seen.
