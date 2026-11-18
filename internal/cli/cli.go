@@ -31,7 +31,7 @@ import (
 )
 
 // Version is the release name printed by "octavo version".
-var Version = "0.1.0"
+var Version = "0.1.1"
 
 const usage = `Octavo writes books in Markdown and publishes them.
 

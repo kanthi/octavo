@@ -2,7 +2,7 @@
 
 A Go command-line tool that turns a folder of Markdown chapters into a book and publishes it. It follows the book workflow of Quarto, but keeps only the parts needed to write and ship a book.
 
-Status (2026-11-18, version 0.1.0, MIT License): HTML, EPUB and PDF output, libraries, preview, checking and publishing are built. In daily use for a library of 14 books (about 2,850 chapters).
+Status (2026-11-18, version 0.1.1, MIT License): HTML, EPUB and PDF output, libraries, preview, checking and publishing are built. In daily use for a library of 14 books (about 2,850 chapters).
 
 ## The job
 

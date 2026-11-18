@@ -446,3 +446,8 @@
 
 - Bug: portal cards counted only the chapters listed in octavo.yml, so Linux showed 425 instead of 444 (19 added by number). Library now keeps `bookFacts` (chapter count and newest date) from the loaded book, built or not; the card falls back to the list only when the book does not load. Test: TestPortalCountsAddedChapters (full build, then a build of another book only).
 - mynotes `.github/workflows/octavo.yml` (in that repo): the site from the last build is kept with actions/cache (public/ plus `.octavo-build`, "<commit> <octavo version>"); a push rebuilds only the books with changed files (`octavo render A B`), and everything when there is no cache, a file outside books/ changed, a book was removed or renamed, Octavo's version changed, or "Run workflow" asks for it. A failed partial build falls back to a full one. The decision step was tested on 9 cases in a scratch clone; `git diff --no-renames` was needed so a renamed book's old folder is seen.
+
+## 2026-11-18 — Release 0.1.1
+
+- Version 0.1.1, tagged `v0.1.1`. Fixes since 0.1.0: Chrome PDFs on Ubuntu 24.04+ (no sandbox when AppArmor forbids it), `{{< meta octavo-version >}}` for every book, https:// addresses in the `--setup github` workflow, and portal cards counting chapters added by number.
+- mynotes' workflow installs `octavo@latest`, sees the new version, and rebuilds every book once.
