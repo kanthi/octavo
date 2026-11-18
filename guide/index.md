@@ -4,7 +4,7 @@ Octavo turns a folder of Markdown files into a book. One command builds it three
 
 ![How Octavo builds a book: chapters go into octavo render, which makes a website, an EPUB and a PDF, which octavo publish sends to a host.](images/flow.svg)
 
-This guide is for **Octavo {{octavo-version}}**. It ships inside the `octavo` program, so the guide you open always matches the version you run:
+This guide is for **Octavo {{< meta octavo-version >}}**. It ships inside the `octavo` program, so the guide you open always matches the version you run:
 
 ```sh
 octavo guide                  # this guide, in your browser

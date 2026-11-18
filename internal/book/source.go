@@ -17,7 +17,8 @@ import (
 //
 //	{{< include other.md >}}        on a line of its own: that file's text
 //	{{< var name >}}                a value from "variables:" in octavo.yml
-//	{{< meta title >}}              a book setting: title, author, date, ...
+//	{{< meta title >}}              a book setting: title, author, date, ...,
+//	                                or octavo-version, the Octavo building it
 //	{{{< var name >}}}              written as is, without the outer braces
 //	::: {.content-visible when-format="pdf"}
 //	...                             only in the PDF ("unless-format",
@@ -38,6 +39,10 @@ var (
 // Formats a format block may name.
 var formatNames = map[string]bool{"html": true, "epub": true, "pdf": true}
 
+// OctavoVersion is the version of the Octavo building the book, for
+// {{< meta octavo-version >}}. The command line sets it.
+var OctavoVersion = "dev"
+
 type expander struct {
 	bookDir string
 	vars    map[string]any
@@ -49,7 +54,7 @@ func newExpander(bookDir string, cfg *config.Config) *expander {
 	b := cfg.Book
 	return &expander{bookDir: bookDir, vars: cfg.Variables, meta: map[string]string{
 		"title": b.Title, "author": b.Author, "date": b.Date, "description": b.Description,
-		"lang": b.Lang, "site-url": b.SiteURL, "created": b.Created,
+		"lang": b.Lang, "site-url": b.SiteURL, "created": b.Created, "octavo-version": OctavoVersion,
 	}}
 }
 
@@ -191,7 +196,7 @@ func (e *expander) shortcodes(line, where string) (string, error) {
 		case "meta":
 			v, ok := e.meta[name]
 			if !ok {
-				err = fmt.Errorf("%s: unknown book setting %q for meta (title, author, date, description, lang, site-url, created)", where, name)
+				err = fmt.Errorf("%s: unknown book setting %q for meta (title, author, date, description, lang, site-url, created, octavo-version)", where, name)
 				return s
 			}
 			return v

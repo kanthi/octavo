@@ -90,6 +90,7 @@ Options:
 
 // Run executes one command and returns the process exit code.
 func Run(args []string, stdout, stderr io.Writer) int {
+	book.OctavoVersion = Version
 	if len(args) == 0 || args[0] == "help" || args[0] == "-h" || args[0] == "--help" {
 		fmt.Fprint(stdout, usage)
 		return 0
@@ -633,7 +634,7 @@ func cmdGuide(args []string, stdout, stderr io.Writer) error {
 		if _, err := os.Lstat(*copyTo); err == nil {
 			return fmt.Errorf("%s already exists; Octavo never overwrites it", *copyTo)
 		}
-		if err := guide.WriteTo(*copyTo, Version); err != nil {
+		if err := guide.WriteTo(*copyTo); err != nil {
 			return err
 		}
 		fmt.Fprintf(stdout, "Wrote the Octavo Guide's source to %s. It is an ordinary book:\n  cd %s\n  octavo preview\n", *copyTo, *copyTo)
@@ -645,7 +646,7 @@ func cmdGuide(args []string, stdout, stderr io.Writer) error {
 		return err
 	}
 	defer os.RemoveAll(src)
-	if err := guide.WriteTo(src, Version); err != nil {
+	if err := guide.WriteTo(src); err != nil {
 		return err
 	}
 

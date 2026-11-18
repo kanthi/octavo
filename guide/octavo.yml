@@ -1,7 +1,7 @@
 book:
   title: Octavo Guide
   author: The Octavo authors
-  description: "The user guide for Octavo {{octavo-version}}: write books in Markdown, build them as a website, an EPUB and a PDF, and publish them."
+  description: "The user guide for Octavo: write books in Markdown, build them as a website, an EPUB and a PDF, and publish them."
   chapters:
     - index.md
     - part: Getting started

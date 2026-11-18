@@ -434,6 +434,9 @@
 
 - MIT `LICENSE` (Copyright (c) 2026 Kanthi). README "Licence" section: the bundled fonts are under the SIL OFL (licence files in internal/format/fonts/files), and the FreeType credit line that golang/freetype's FreeType License asks for.
 - Version 0.007 → 0.1.0 (`cli.Version`), tagged `v0.1.0`, so `go install …@v0.1.0` works. Later versions follow semver: features bump the minor, fixes the patch.
-- `.github/workflows/docs.yml`: on every push to main, run the tests, build Octavo from that commit, render the guide (website, PDF with Typst, EPUB) and deploy it to GitHub Pages at https://kanthi.github.io/octavo/. Pages' source set to "GitHub Actions".
+- `.github/workflows/docs.yml`: on every push to main, run the tests, build Octavo from that commit, render the guide (website, PDF with Typst, EPUB) and deploy it to GitHub Pages at https://www.kanthi.in/octavo/ (the account's own domain; kanthi.github.io/octavo forwards there). Pages' source set to "GitHub Actions".
 - `guide/octavo-pages.txt` committed, so redirects for moved guide chapters survive CI's clean checkouts.
 - First CI run: TestFormats and TestPDF/chrome failed. GitHub's Ubuntu runner has Chromium, which aborted because Ubuntu's AppArmor stops it from setting up its sandbox. The PDF format now retries once with `--no-sandbox` on Linux when the browser fails that way, and errors show the browser's FATAL/ERROR lines instead of the tail of the stack trace.
+- The guide went live at https://www.kanthi.in/octavo/. Two fixes after the first deploy:
+  - The front page showed `{{octavo-version}}`: only `octavo guide` replaced it. Now `{{< meta octavo-version >}}` is a value every book can use, filled in by the Octavo building it (`book.OctavoVersion`, set in `cli.Run`); guide.WriteTo no longer rewrites text.
+  - The sitemap and canonical/og:url used http://, because configure-pages reports http when the repository does not enforce HTTPS. docs.yml now turns it into https://.

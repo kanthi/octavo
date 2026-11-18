@@ -2,7 +2,7 @@
 
 Write books in Markdown. Octavo builds them as a website, an EPUB and a PDF, and publishes them. It is one program written in Go, modelled on the book workflow of [Quarto](https://quarto.org) with far fewer features, and not affiliated with it.
 
-Version `0.1.0`. Documentation: **[kanthi.github.io/octavo](https://kanthi.github.io/octavo/)**, also built into the program as `octavo guide`.
+Version `0.1.0`. Documentation: **[www.kanthi.in/octavo](https://www.kanthi.in/octavo/)**, also built into the program as `octavo guide`.
 
 ## What you get
 
